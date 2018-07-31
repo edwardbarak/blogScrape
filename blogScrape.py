@@ -1,13 +1,15 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
 post = 1
-url = input("Start Page URL: ")
+finished = False
+urls = [input("Start Page URL: ")]
 nextLinkText = input("Next link's text (Must be EXACT): ")
 
-while post <= 3:
-    try:
-        response = requests.get(url)
+try:
+    while finished == False:
+        response = requests.get(urls[-1])
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -21,4 +23,10 @@ while post <= 3:
         file.close()
         post += 1
 
-        url = soup.find('a', string=nextLinkText)['href']
+        urls.append(soup.find('a', string=nextLinkText)['href'])
+except TypeError:
+    print('Exception: ' + urls[-1])
+    finished = True
+
+print(str(post - 1) + ' posts scraped.')
+print('Script terminating.')
