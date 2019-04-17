@@ -17,7 +17,7 @@ I don't care.
 
 
 # Blog Scrape
-> Python library to extract contents from blogs
+> Python library to extract blog content
 
 Writes blog post text to file, then goes to the next blog post and does it again until there aren't anymore posts.When
 
